@@ -8,9 +8,12 @@ import { getMovies } from "../../services/movieService";
 import { useEffect } from "react";
 
 export const MovieCatalog = () => {
-  const { data, isLoading } = useInfiniteQuery({
+  const { data, isLoading, fetchNextPage } = useInfiniteQuery({
     queryKey: ["getPopularMovies"],
     queryFn: ({ pageParam = 1 }) => getMovies(pageParam),
+    getNextPageParam: (_lastPage, allPages) => {
+      return allPages.length + 1;
+    }
   });
 
   const movies = data?.pages.flat() || [];
@@ -18,7 +21,7 @@ export const MovieCatalog = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        console.log("Je suis en bas de la page !");
+        fetchNextPage();
       }
     };
 
