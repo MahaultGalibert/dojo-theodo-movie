@@ -5,7 +5,7 @@ import styles from "./MoviePreview.module.css";
 const MoviePreview = ({ movie }: { movie: Movie }) => {
   const rating = Math.floor((movie.vote_average * 5) / 10);
   const goToMovieDetails = () => {
-    // A DEFINIR EXPERT
+    window.location.href = `/movie/${movie.id}`;
   };
 
   return (
@@ -22,9 +22,8 @@ const MoviePreview = ({ movie }: { movie: Movie }) => {
           {[...Array(5)].map((_, index) => (
             <span
               key={index}
-              className={`${styles.star} ${
-                index < rating ? styles.orange : ""
-              }`}
+              className={`${styles.star} ${index < rating ? styles.orange : ""
+                }`}
             >
               ★
             </span>
