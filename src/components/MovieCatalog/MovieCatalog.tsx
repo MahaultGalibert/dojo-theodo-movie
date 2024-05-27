@@ -5,6 +5,7 @@ import MoviePreview from "../MoviePreview/MoviePreview";
 
 import { useInfiniteQuery } from "react-query";
 import { getMovies } from "../../services/movieService";
+import { useEffect } from "react";
 
 export const MovieCatalog = () => {
   const { data, isLoading } = useInfiniteQuery({
@@ -13,6 +14,17 @@ export const MovieCatalog = () => {
   });
 
   const movies = data?.pages.flat() || [];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        console.log("Je suis en bas de la page !");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [movies]);
 
   return (
     <>
