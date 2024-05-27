@@ -1,2 +1,7 @@
 .movieCard {
 }
+
+.moviePoster {
+    height: 300px;
+    background-size: cover;
+  }
