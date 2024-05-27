@@ -3,6 +3,8 @@ import styles from "./MovieDetails.module.css";
 import { getMovieById } from "../../services/movieService";
 import { useParams } from "react-router-dom";
 import { Movie } from "../../models";
+import { POSTER_URL_PREFIX } from "../../App";
+import { ArrowBigLeft } from "lucide-react";
 
 const MovieDetails = () => {
   let { id: movieId } = useParams();
@@ -25,9 +27,29 @@ const MovieDetails = () => {
 
   const movie = data as Movie;
 
-  console.log(movie);
+  return (
+    <div className={styles.moviePage}>
+      <div className={styles.header}>
+        <button
+          className={styles.backButton}
+          onClick={() => (location.href = "/")}
+        >
+          <ArrowBigLeft />
+          Retourner à la liste des films
+        </button>
+      </div>
 
-  return <div className={styles.moviePage}></div>;
+      <h1>{movie.title}</h1>
+      <img
+        src={`${POSTER_URL_PREFIX}/${movie.poster_path}`}
+        width={200}
+        alt={movie.title}
+      />
+      <p>{movie.overview}</p>
+      <p>Rating: {movie.vote_average}</p>
+      <p>Release date: {movie.release_date}</p>
+    </div>
+  );
 };
 
 export default MovieDetails;

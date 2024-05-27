@@ -1,2 +1,41 @@
 .moviePage {
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .header {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+  
+    justify-content: space-between;
+  }
+  
+  .moviePage h1 {
+    font-size: 2em;
+    margin-bottom: 1em;
+  }
+  
+  .moviePage img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .moviePage p {
+    margin-bottom: 1em;
+  }
+  
+  .backButton {
+    padding: 10px;
+    all: unset;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+    border-radius: 10px;
+    transition: 0.1s;
+  
+    cursor: pointer;
+  }
