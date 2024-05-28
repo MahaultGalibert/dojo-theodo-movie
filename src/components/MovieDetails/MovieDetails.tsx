@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Movie } from "../../models";
 import { POSTER_URL_PREFIX } from "../../App";
 import { ArrowBigLeft, Minus, Plus } from "lucide-react";
-import { addFavorite, isMovieFavorite } from "../../services/favoritesService";
+import { addFavorite, isMovieFavorite, removeFavorite } from "../../services/favoritesService";
 
 const MovieDetails = () => {
   let { id: movieId } = useParams();
@@ -35,6 +35,11 @@ const MovieDetails = () => {
     location.reload();
   };
 
+  const handleRemoveFavorite = () => {
+    removeFavorite(movie.id);
+    location.reload();
+  };
+
   return (
     <div className={styles.moviePage}>
       <div className={styles.header}>
@@ -47,7 +52,10 @@ const MovieDetails = () => {
         </button>
 
         {isFavorite ? (
-          <button className={styles.removeFavoriteButton}>
+          <button
+            className={styles.removeFavoriteButton}
+            onClick={handleRemoveFavorite}
+          >
             <Minus />
             Retirer des favoris
           </button>
