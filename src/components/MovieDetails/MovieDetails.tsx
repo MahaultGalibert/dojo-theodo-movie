@@ -4,7 +4,7 @@ import { getMovieById } from "../../services/movieService";
 import { useParams } from "react-router-dom";
 import { Movie } from "../../models";
 import { POSTER_URL_PREFIX } from "../../App";
-import { ArrowBigLeft } from "lucide-react";
+import { ArrowBigLeft, Plus } from "lucide-react";
 
 const MovieDetails = () => {
   let { id: movieId } = useParams();
@@ -36,6 +36,11 @@ const MovieDetails = () => {
         >
           <ArrowBigLeft />
           Retourner à la liste des films
+        </button>
+
+        <button className={styles.addFavoriteButton}>
+          <Plus />
+          Ajouter aux favoris
         </button>
       </div>
 
