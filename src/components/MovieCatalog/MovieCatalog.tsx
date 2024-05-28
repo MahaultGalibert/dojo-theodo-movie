@@ -4,15 +4,20 @@ import GenreList from "../GenreList/GenreList";
 import MoviePreview from "../MoviePreview/MoviePreview";
 
 import { useInfiniteQuery } from "react-query";
-import { getMovies } from "../../services/movieService";
+import { getMovies, searchMovies } from "../../services/movieService";
 import { useEffect } from "react";
 import { useMovieContext } from "../../context/MovieContext";
 
 export const MovieCatalog = () => {
-  const { selectedGenres } = useMovieContext();
+  const { selectedGenres, search } = useMovieContext();
   const { data, isLoading, fetchNextPage } = useInfiniteQuery({
     queryKey: ["getPopularMovies", selectedGenres],
-    queryFn: ({ pageParam = 1 }) => getMovies(pageParam, selectedGenres),
+    queryFn: ({ pageParam = 1 }) => {
+      if (search) {
+        return searchMovies(pageParam, search);
+      }
+      return getMovies(pageParam, selectedGenres);
+    },
     getNextPageParam: (_lastPage, allPages) => {
       return allPages.length + 1;
     }
