@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { Movie } from "../../models";
 import { POSTER_URL_PREFIX } from "../../App";
 import { ArrowBigLeft, Plus } from "lucide-react";
+import { addFavorite } from "../../services/favoritesService";
 
 const MovieDetails = () => {
   let { id: movieId } = useParams();
@@ -27,6 +28,11 @@ const MovieDetails = () => {
 
   const movie = data as Movie;
 
+  const handleAddFavorite = () => {
+    addFavorite(movie.id);
+    location.reload();
+  };
+
   return (
     <div className={styles.moviePage}>
       <div className={styles.header}>
@@ -38,7 +44,10 @@ const MovieDetails = () => {
           Retourner à la liste des films
         </button>
 
-        <button className={styles.addFavoriteButton}>
+        <button
+          className={styles.addFavoriteButton}
+          onClick={handleAddFavorite}
+        >
           <Plus />
           Ajouter aux favoris
         </button>
