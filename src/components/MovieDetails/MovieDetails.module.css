@@ -51,3 +51,29 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.removeFavoriteButton {
+  color: white;
+  background-color: tomato;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+  border: 1px solid tomato;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.removeFavoriteButton:hover {
+  background-color: red;
+  border: 1px solid red;
+
+  transition: 200;
+}
+
+.addFavoriteButton:hover {
+  background-color: orange;
+  border: 1px solid orange;
+
+  transition: 200;
+}
