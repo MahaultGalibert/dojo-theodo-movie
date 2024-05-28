@@ -7,6 +7,7 @@ import { useInfiniteQuery } from "react-query";
 import { getMovies, searchMovies } from "../../services/movieService";
 import { useEffect } from "react";
 import { useMovieContext } from "../../context/MovieContext";
+import { getFavorites } from "../../services/favoritesService";
 
 export const MovieCatalog = () => {
   const { selectedGenres, search } = useMovieContext();
@@ -25,6 +26,8 @@ export const MovieCatalog = () => {
 
   const movies = data?.pages.flat() || [];
 
+  const favoriteMovies = getFavorites();
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
@@ -41,7 +44,13 @@ export const MovieCatalog = () => {
       <GenreList />
       <div className={styles.layout}>
         {!isLoading &&
-          movies.map((movie) => <MoviePreview key={movie.id} movie={movie} />)}
+          movies.map((movie) => (
+            <MoviePreview
+              key={movie.id}
+              movie={movie}
+              isFavorite={favoriteMovies.includes(movie.id)}
+            />
+          ))}
 
         {isLoading && <div>Chargement...</div>}
       </div>

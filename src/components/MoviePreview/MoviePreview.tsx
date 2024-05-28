@@ -2,14 +2,23 @@ import { POSTER_URL_PREFIX } from "../../App";
 import { Movie } from "../../models";
 import styles from "./MoviePreview.module.css";
 
-const MoviePreview = ({ movie }: { movie: Movie }) => {
+const MoviePreview = ({
+  movie,
+  isFavorite,
+}: {
+  movie: Movie;
+  isFavorite: boolean;
+}) => {
   const rating = Math.floor((movie.vote_average * 5) / 10);
   const goToMovieDetails = () => {
     window.location.href = `/movie/${movie.id}`;
   };
 
   return (
-    <div className={styles.movieCard} onClick={goToMovieDetails}>
+    <div
+      className={`${styles.movieCard} ${isFavorite ? styles.isFavorite : ""}`}
+      onClick={goToMovieDetails}
+    >
       <div
         className={styles.moviePoster}
         style={{
